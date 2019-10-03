@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Cotação do Dólar</title>
+</head>
+<body>
+	<div id="app"></div>
+	<script>
+		
+		let campo = document.getElementById('app')      
+		
+		//Defino a URL da API, que retornara informacoes da cotacao
+		let url = 'https://economia.awesomeapi.com.br/json/list/USD-BRL/1'
+		//Faço a promise da url usando o fetch
+		fetch(url)
+		//Se o resultado da promisse for ok, entao transformo a informacao em json
+		.then(res => res.json())
+		//Pego o json ja preparado e faco um reduce iterando e retornando os dados que quero (high e low) montados em elementos HTML usando template strings para concatenar
+		.then(data => {
+			const items = data.reduce(
+				(html, dados) => html + `<li>Alta do Dólar: ${dados.high} </br> Baixa do Dólar: ${dados.low}</li>`, '' 	
+			)
+			//Insiro na página os items já montados com o reduce
+			campo.insertAdjacentHTML('beforeend', ` <ul>${items}</ul>`)
+		})
+		//Caso de erro na promise, retorno um erro
+		.catch((e)=>console.error(e))
+
+	</script> 
+</body>
+</html>
+
