@@ -16,9 +16,9 @@
 		let url = 'https://economia.awesomeapi.com.br/json/list/USD-BRL/1'
 		//Faço a promise da url usando o fetch
 		fetch(url)
-		//Se o resultado da promisse for ok, entao transformo a informacao em json
+		//Se a promisse do fetch for ok, entao transformo a informacao usando a funcao .json()
 		.then(res => res.json())
-		//Pego o json ja preparado e faco um reduce iterando e retornando os dados que quero (high e low) montados em elementos HTML usando template strings para concatenar
+		//Pego o json ja preparado e faco um reduce iterando e retornando os dados que quero (high e low)
 		.then(data => {
 			const items = data.reduce(
 				(html, dados) => html + `<li>Alta do Dólar: ${dados.high} </br> Baixa do Dólar: ${dados.low}</li>`, '' 	
